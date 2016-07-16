@@ -1,0 +1,40 @@
+{
+    "name": "richardhj/contao-isotope_simple_stockmanagement",
+    "type": "contao-module",
+    "description": "Simple stock management for Isotope eCommerce",
+    "keywords": [
+        "contao",
+        "isotope",
+        "stock management",
+        "stockmanagement"
+    ],
+    "license": "LGPL-3.0+",
+    "authors": [
+        {
+            "name": "Richard Henkenjohann",
+            "email": "richardhenkenjohann@googlemail.com",
+            "role": "Developer"
+        }
+    ],
+    "support": {
+        "issues": "https://github.com/richardhj/contao-isotope_simple_stockmanagement/issues",
+        "source": "https://github.com/richardhj/contao-isotope_simple_stockmanagement"
+    },
+    "require": {
+        "php": ">=5.3",
+        "contao/core": "~3.2",
+        "isotope/core": "~2.3"
+    },
+    "autoload": {
+        "psr-0": {
+            "Isotope\\": "src/"
+        }
+    },
+    "extra": {
+        "contao": {
+            "sources": {
+                "contao": "system/modules/isotope_simple_stockmanagement"
+            }
+        }
+    }
+}
