@@ -2,7 +2,7 @@
 
 [![Latest Version on Packagist][ico-version]][link-packagist]
 [![Software License][ico-license]]()
-[![Dependency Status](ico-dependencies)][link-dependencies]
+[![Dependency Status][ico-dependencies]][link-dependencies]
 
 Just a simple stock management for Isotope eCommerce. The stock per product is not a simple counter – every stock change will be tracked and you will be able to see which order caused a product's stock change (good for troubleshooting).
 Provides the possibility to deactivate a product if it runs out of stock. Provides the possibility to send (multiple) messages to the shop admin by configurable stock thresholds.
@@ -21,9 +21,10 @@ $ composer require richardhj/contao-isotope_simple_stockmanagement
 * Add the attribute "stock" to the product type
 * Create initial stock for the products by editing the product
 
-## To be integrated
+## To be integrated or fixed
 
 * Messages for "product in stock" etc. in the front end
+* Languge files
 
 ## License
 
