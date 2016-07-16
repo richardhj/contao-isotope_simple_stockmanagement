@@ -10,6 +10,7 @@
 
 
 use Isotope\Model\ProductType;
+use NotificationCenter\Model\Notification;
 
 
 /** @noinspection PhpUndefinedMethodInspection */
@@ -38,7 +39,7 @@ $GLOBALS['TL_DCA'][$table]['fields']['stockmanagement_active'] = [
     'label'     => &$GLOBALS['TL_LANG'][$table]['stockmanagement_active'],
     'inputType' => 'checkbox',
     'eval'      => [
-        'tl_class' => 'w50',
+        'tl_class'       => 'w50',
         'submitOnChange' => true,
     ],
     'sql'       => "char(1) NOT NULL default ''",
@@ -63,11 +64,26 @@ $GLOBALS['TL_DCA'][$table]['fields']['stockmanagement_notifications'] = [
             'threshold' => [
                 'inputType' => 'text',
                 'eval'      => [
-                    'rgxp' => 'digit',
+                    'rgxp'      => 'digit',
+                    'mandatory' => true,
                 ],
             ],
-            'nc_id'        => [
-                'inputType' => 'select',
+            'nc_id'     => [
+                'inputType'        => 'select',
+                'eval'             => [
+                    'mandatory' => true,
+                ],
+                'options_callback' => function (\DataContainer $dc) {
+                    /** @var Notification|\Model\Collection $notifications */
+                    /** @noinspection PhpUndefinedMethodInspection */
+                    $notifications = Notification::findBy('type', 'iso_stockmanagement_change');
+
+                    if (null === $notifications) {
+                        return [];
+                    }
+
+                    return $notifications->fetchEach('title');
+                },
             ],
         ],
     ],
@@ -78,7 +94,7 @@ $GLOBALS['TL_DCA'][$table]['fields']['stockmanagement_disableProduct'] = [
     'label'     => &$GLOBALS['TL_LANG'][$table]['stockmanagement_disableProduct'],
     'inputType' => 'checkbox',
     'eval'      => [
-        'tl_class'       => 'w50',
+        'tl_class' => 'w50',
     ],
     'sql'       => "char(1) NOT NULL default ''",
 ];
