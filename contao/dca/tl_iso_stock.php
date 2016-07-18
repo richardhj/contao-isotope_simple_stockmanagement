@@ -20,7 +20,7 @@ $table = Isotope\Model\Stock::getTable();
 $GLOBALS['TL_DCA'][$table] = [
 
     // Config
-    'config'       => [
+    'config'   => [
         'dataContainer'    => 'Table',
         'ptable'           => Isotope\Model\Product::getTable(),
         'notDeletable'     => true,
@@ -34,7 +34,7 @@ $GLOBALS['TL_DCA'][$table] = [
     ],
 
     // List
-    'list'         => [
+    'list'     => [
         'sorting' => [
             'mode'   => 2,
             'fields' => ['tstamp ASC'],
@@ -54,18 +54,13 @@ $GLOBALS['TL_DCA'][$table] = [
         ],
     ],
 
-    // Meta palettes
-    'metapalettes' => [
-        'default' => [
-            'stock' => [
-                'quantity',
-                'comment',
-            ],
-        ],
+    // Palettes
+    'palettes' => [
+        'default' => '{stock_legend},quantity,comment',
     ],
 
     // Fields
-    'fields'       => [
+    'fields'   => [
         'id'                    => [
             'sql' => "int(10) unsigned NOT NULL auto_increment",
         ],
