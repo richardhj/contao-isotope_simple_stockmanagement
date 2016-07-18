@@ -16,20 +16,6 @@ $table = Isotope\Model\Product::getTable();
 /**
  * Fields
  */
-$GLOBALS['TL_DCA'][$table]['fields']['stock'] = [
-    'label'      => &$GLOBALS['TL_LANG'][$table]['bonus_points'],
-    'inputType'  => 'text',
-    'eval'       => [
-        'maxlength' => 10,
-        'rgxp'      => 'digit',
-        'tl_class'  => 'w50',
-    ],
-    'attributes' => [
-        'legend' => 'stockmanagement_legend',
-    ],
-    'sql'        => "int(10) unsigned NOT NULL default '0'",
-];
-
 /** @noinspection PhpUndefinedMethodInspection */
 $GLOBALS['TL_DCA'][$table]['fields']['stock'] = [
     'label'        => &$GLOBALS['TL_LANG'][$table]['stock'],
