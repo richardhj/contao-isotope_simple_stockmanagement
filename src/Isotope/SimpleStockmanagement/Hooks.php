@@ -173,8 +173,11 @@ class Hooks
                 $stockChange->source = Stock::STOCKMANAGEMENT_SOURCE_ORDER;
                 $stockChange->save();
 
+                // Fetch current stock
+                $stock = Stock::getStockForProduct($product->id);
+
                 // Disable product if necessary
-                if ($productType->stockmanagement_disableProduct) {
+                if ($productType->stockmanagement_disableProduct && false !== $stock && $stock < 1) {
                     $product->published = '';
                     $product->save();
                 }
@@ -184,7 +187,7 @@ class Hooks
                     $notifications = deserialize($productType->stockmanagement_notifications);
 
                     foreach ($notifications as $notification) {
-                        if (Stock::getStockForProduct($product->id) <= $notification['threshold']) {
+                        if ($stock <= $notification['threshold']) {
                             /** @noinspection PhpUndefinedMethodInspection */
                             /** @var Notification $notificationCenter */
                             $notificationCenter = Notification::findByPk($notification['nc_id']);
