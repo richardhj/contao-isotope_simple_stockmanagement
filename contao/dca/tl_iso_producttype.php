@@ -73,7 +73,7 @@ $GLOBALS['TL_DCA'][$table]['fields']['stockmanagement_notifications'] = [
                 'eval'             => [
                     'mandatory' => true,
                 ],
-                'options_callback' => function (\DataContainer $dc) {
+                'options_callback' => function () {
                     /** @var Notification|\Model\Collection $notifications */
                     /** @noinspection PhpUndefinedMethodInspection */
                     $notifications = Notification::findBy('type', 'iso_stockmanagement_change');
