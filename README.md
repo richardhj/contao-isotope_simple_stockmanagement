@@ -5,7 +5,9 @@
 [![Dependency Status][ico-dependencies]][link-dependencies]
 
 Just a simple stock management for Isotope eCommerce. The stock per product is not a simple counter – every stock change will be tracked and you will be able to see which order caused a product's stock change (good for troubleshooting).
-Provides the possibility to deactivate a product if it runs out of stock. Provides the possibility to send (multiple) messages to the shop admin by configurable stock thresholds.
+
+Provides the possibility to deactivate a product if it runs out of stock.
+Provides the possibility to send messages to the shop admin by configurable stock thresholds.
 
 ## Install
 
@@ -21,10 +23,11 @@ $ composer require richardhj/contao-isotope_simple_stockmanagement
 * Add the attribute "stock" to the product type
 * Create initial stock for the products by editing the product
 
-## To be integrated or fixed
+## TODO
 
 * Messages for "product in stock" etc. in the front end
 * Languge files
+* This extension could be used as basis for merchandise management bridge systems
 
 ## License
 
@@ -32,7 +35,7 @@ The  GNU Lesser General Public License (LGPL).
 
 [ico-version]: https://img.shields.io/packagist/v/richardhj/contao-isotope_simple_stockmanagement.svg?style=flat-square
 [ico-license]: https://img.shields.io/badge/license-LGPL-brightgreen.svg?style=flat-square
-[ico-dependencies]: https://www.versioneye.com/php/richardhj:contao-isotope_simple_stockmanagement/badge.svg
+[ico-dependencies]: https://www.versioneye.com/php/richardhj:contao-isotope_simple_stockmanagement/badge.svg?style=flat-square
 
 [link-packagist]: https://packagist.org/packages/richardhj/contao-isotope_simple_stockmanagement
 [link-dependencies]: https://www.versioneye.com/php/richardhj:contao-isotope_simple_stockmanagement
