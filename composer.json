@@ -27,13 +27,13 @@
     },
     "autoload": {
         "psr-0": {
-            "Isotope\\": "src/"
+            "Isotope\\": "system/modules/isotope_simple_stockmanagement/src/"
         }
     },
     "extra": {
         "contao": {
             "sources": {
-                "contao": "system/modules/isotope_simple_stockmanagement"
+                "system/modules/isotope_simple_stockmanagement": "system/modules/isotope_simple_stockmanagement"
             }
         }
     }
