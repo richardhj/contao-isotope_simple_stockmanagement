@@ -34,6 +34,7 @@ $GLOBALS['ISO_HOOKS']['updateItemInCollection'][] = [
     'Isotope\SimpleStockmanagement\Hooks',
     'checkBeforeUpdateCollection',
 ];
+$GLOBALS['ISO_HOOKS']['itemIsAvailable'][] = ['Isotope\SimpleStockmanagement\Hooks', 'checkItemIsAvailable'];
 $GLOBALS['ISO_HOOKS']['preCheckout'][] = ['Isotope\SimpleStockmanagement\Hooks', 'checkBeforeCheckout'];
 $GLOBALS['ISO_HOOKS']['postCheckout'][] = ['Isotope\SimpleStockmanagement\Hooks', 'updateStockPostCheckout'];
 

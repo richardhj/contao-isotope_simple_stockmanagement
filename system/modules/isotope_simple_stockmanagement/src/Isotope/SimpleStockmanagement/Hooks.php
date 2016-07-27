@@ -113,6 +113,34 @@ class Hooks
 
 
     /**
+     * @category ISO_HOOKS: itemIsAvailable
+     *
+     * @param ProductCollectionItem|\Model $item
+     *
+     * @return false|null Return false but never true
+     */
+    public function checkItemIsAvailable(ProductCollectionItem $item)
+    {
+        /** @var Product|\Model $product */
+        $product = $item->getProduct();
+        /** @var ProductType|\Model $productType */
+        $productType = $product->getRelated('type');
+
+        if (!$productType->stockmanagement_active) {
+            return null;
+        }
+
+        $stock = Stock::getStockForProduct($product->id);
+
+        if (false !== $stock && $item->quantity > $stock) {
+            return false;
+        }
+
+        return null;
+    }
+
+
+    /**
      * @category ISO_HOOKS: preCheckout
      *
      * @param ProductCollection\Order $order
