@@ -91,8 +91,7 @@ class Hooks
         }
 
         /** @var Product|\Model $product */
-        /** @noinspection PhpUndefinedMethodInspection */
-        $product = Product::findByPk($item->getProduct()->getProductId());
+        $product = $item->getProduct();
         /** @var ProductType|\Model $productType */
         $productType = $product->getRelated('type');
 
@@ -151,7 +150,8 @@ class Hooks
     public function checkBeforeCheckout(ProductCollection\Order $order, Checkout $checkout)
     {
         foreach ($order->getItems() as $item) {
-            $product = Product::findAvailableByPk($item->getProduct()->getProductId());
+            /** @var Product|\Model $product */
+            $product = $item->getProduct();
             $productType = $product->getRelated('type');
             $stock = Stock::getStockForProduct($product->id);
 
@@ -187,7 +187,8 @@ class Hooks
     public function updateStockPostCheckout(ProductCollection\Order $order, array $tokens)
     {
         foreach ($order->getItems() as $item) {
-            $product = Product::findAvailableByPk($item->getProduct()->getProductId());
+            /** @var Product|\Model $product */
+            $product = $item->getProduct();
             $productType = $product->getRelated('type');
 
             if ($productType->stockmanagement_active) {
