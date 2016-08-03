@@ -31,6 +31,7 @@ Install https://github.com/terminal42/contao-NamespaceClassLoader (available via
 
 * Messages for "product in stock" etc. in the front end
 * Languge files
+* An alternative input mask // Mode editAll is not supported!
 * This extension could be used as basis for merchandise management bridge systems
 
 ## License
