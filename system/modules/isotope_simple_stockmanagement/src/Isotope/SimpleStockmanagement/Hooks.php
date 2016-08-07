@@ -131,7 +131,7 @@ class Hooks
 
         $stock = Stock::getStockForProduct($product->id);
 
-        if (false !== $stock && $item->quantity > $stock) {
+        if (false !== $stock && $stock < 1) {
             return false;
         }
 
