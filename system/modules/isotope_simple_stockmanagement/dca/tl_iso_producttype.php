@@ -86,6 +86,23 @@ $GLOBALS['TL_DCA'][$table]['fields']['stockmanagement_notifications'] = [
                 },
             ],
         ],
+    'save_callback' => [
+        // Sort by threshold ascending
+        function ($value) {
+            $value = deserialize($value);
+
+            $thresholds = array_reduce(
+                $value,
+                function ($carry, $item) {
+                    return array_merge($carry, [$item['threshold']]);
+                },
+                []
+            );
+
+            array_multisort($thresholds, SORT_NUMERIC, $value);
+
+            return serialize($value);
+        },
     ],
     'sql'       => "text NULL",
 ];
