@@ -34,16 +34,25 @@ $GLOBALS['ISO_HOOKS']['updateItemInCollection'][] = [
     'Isotope\SimpleStockmanagement\Hooks',
     'checkBeforeUpdateCollection',
 ];
-$GLOBALS['ISO_HOOKS']['itemIsAvailable'][] = ['Isotope\SimpleStockmanagement\Hooks', 'checkItemIsAvailable'];
-$GLOBALS['ISO_HOOKS']['preCheckout'][] = ['Isotope\SimpleStockmanagement\Hooks', 'checkBeforeCheckout'];
-$GLOBALS['ISO_HOOKS']['postCheckout'][] = ['Isotope\SimpleStockmanagement\Hooks', 'updateStockPostCheckout'];
+$GLOBALS['ISO_HOOKS']['itemIsAvailable'][] = [
+    'Isotope\SimpleStockmanagement\Hooks',
+    'checkItemIsAvailable',
+];
+$GLOBALS['ISO_HOOKS']['preCheckout'][] = [
+    'Isotope\SimpleStockmanagement\Hooks',
+    'checkBeforeCheckout',
+];
+$GLOBALS['ISO_HOOKS']['postCheckout'][] = [
+    'Isotope\SimpleStockmanagement\Hooks',
+    'updateStockPostCheckout',
+];
 
 
 /**
  * Notification Center Notification Types
  */
 $GLOBALS['NOTIFICATION_CENTER']['NOTIFICATION_TYPE']['isotope']['iso_stockmanagement_change']['recipients'] = [
-    'admin_email'
+    'admin_email',
 ];
 $GLOBALS['NOTIFICATION_CENTER']['NOTIFICATION_TYPE']['isotope']['iso_stockmanagement_change']['email_text'] = [
     'product_*',
