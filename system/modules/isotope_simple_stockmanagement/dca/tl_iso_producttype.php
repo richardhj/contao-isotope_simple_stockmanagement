@@ -22,7 +22,7 @@ $table = ProductType::getTable();
  */
 $GLOBALS['TL_DCA'][$table]['palettes']['__selector__'][] = 'stockmanagement_active';
 $GLOBALS['TL_DCA'][$table]['palettes']['__selector__'][] = 'stockmanagement_notification';
-$GLOBALS['TL_DCA'][$table]['palettes']['standard'] .= ';stockmanagement_active';
+$GLOBALS['TL_DCA'][$table]['palettes']['standard'] .= ';{stockmanagement_legend},stockmanagement_active';
 
 
 /**
@@ -56,20 +56,23 @@ $GLOBALS['TL_DCA'][$table]['fields']['stockmanagement_notification'] = [
 ];
 
 $GLOBALS['TL_DCA'][$table]['fields']['stockmanagement_notifications'] = [
-    'label'     => &$GLOBALS['TL_LANG'][$table]['stockmanagement_notifications'],
-    'inputType' => 'multiColumnWizard',
-    'eval'      => [
+    'label'         => &$GLOBALS['TL_LANG'][$table]['stockmanagement_notifications'],
+    'inputType'     => 'multiColumnWizard',
+    'eval'          => [
         'tl_class'     => 'clr',
         'columnFields' => [
             'threshold' => [
                 'inputType' => 'text',
+                'label'     => &$GLOBALS['TL_LANG'][$table]['stockmanagement_notifications_threshold'],
                 'eval'      => [
                     'rgxp'      => 'digit',
                     'mandatory' => true,
+                    'style'     => 'width:60px;text-align:right',
                 ],
             ],
             'nc_id'     => [
                 'inputType'        => 'select',
+                'label'            => &$GLOBALS['TL_LANG'][$table]['stockmanagement_notifications_nc_id'],
                 'eval'             => [
                     'mandatory' => true,
                 ],
@@ -86,6 +89,8 @@ $GLOBALS['TL_DCA'][$table]['fields']['stockmanagement_notifications'] = [
                 },
             ],
         ],
+        'buttons'      => ['up' => false, 'down' => false],
+    ],
     'save_callback' => [
         // Sort by threshold ascending
         function ($value) {
@@ -104,7 +109,7 @@ $GLOBALS['TL_DCA'][$table]['fields']['stockmanagement_notifications'] = [
             return serialize($value);
         },
     ],
-    'sql'       => "text NULL",
+    'sql'           => "text NULL",
 ];
 
 $GLOBALS['TL_DCA'][$table]['fields']['stockmanagement_disableProduct'] = [
