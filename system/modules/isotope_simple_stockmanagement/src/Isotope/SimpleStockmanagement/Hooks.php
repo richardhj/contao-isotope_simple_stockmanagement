@@ -226,7 +226,7 @@ class Hooks
                             }
 
                             // Do not send multiple notifications
-                            break 2;
+                            break;
                         }
                     }
                 }
