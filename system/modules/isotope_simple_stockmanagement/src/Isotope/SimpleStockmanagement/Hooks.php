@@ -181,10 +181,10 @@ class Hooks
      * @category ISO_HOOKS: postCheckout
      *
      * @param ProductCollection\Order $order
-     * @param array                   $tokens
      *
+     * @internal param array $tokens
      */
-    public function updateStockPostCheckout(ProductCollection\Order $order, array $tokens)
+    public function updateStockPostCheckout(ProductCollection\Order $order)
     {
         foreach ($order->getItems() as $item) {
             /** @var Product|\Model $product */
@@ -207,8 +207,10 @@ class Hooks
 
                 // Disable product if necessary
                 if ($productType->stockmanagement_disableProduct && false !== $stock && $stock < 1) {
-                    $product->published = '';
-                    $product->save();
+                    // Changed behavior. See #2
+                    \Database::getInstance()
+                        ->prepare("UPDATE {$product::getTable()} SET published='' WHERE id=?")
+                        ->execute($product->id);
                 }
 
                 // Send stock change notifications
