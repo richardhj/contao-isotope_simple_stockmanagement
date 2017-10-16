@@ -12,7 +12,7 @@
  */
 
 
-$table = Richardhj\Isotope\Model\Stock::getTable();
+$table = Richardhj\Isotope\SimpleStockmanagement\Model\Stock::getTable();
 
 
 /**
@@ -36,9 +36,9 @@ $GLOBALS['TL_LANG'][$table]['comment'][1] = 'Geben Sie einen optionalen Hinweis 
 /**
  * References
  */
-$GLOBALS['TL_LANG'][$table]['source_options'][Richardhj\Isotope\Model\Stock::STOCKMANAGEMENT_SOURCE_BACKEND] = 'Backend';
-$GLOBALS['TL_LANG'][$table]['source_options'][Richardhj\Isotope\Model\Stock::STOCKMANAGEMENT_SOURCE_ORDER] = 'Bestellung';
-$GLOBALS['TL_LANG'][$table]['source_options'][Richardhj\Isotope\Model\Stock::STOCKMANAGEMENT_SOURCE_IMPORT] = 'Import';
+$GLOBALS['TL_LANG'][$table]['source_options'][Richardhj\Isotope\SimpleStockmanagement\Model\Stock::STOCKMANAGEMENT_SOURCE_BACKEND] = 'Backend';
+$GLOBALS['TL_LANG'][$table]['source_options'][Richardhj\Isotope\SimpleStockmanagement\Model\Stock::STOCKMANAGEMENT_SOURCE_ORDER] = 'Bestellung';
+$GLOBALS['TL_LANG'][$table]['source_options'][Richardhj\Isotope\SimpleStockmanagement\Model\Stock::STOCKMANAGEMENT_SOURCE_IMPORT] = 'Import';
 
 
 /**

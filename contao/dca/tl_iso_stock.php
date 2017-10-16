@@ -12,7 +12,7 @@
  */
 
 
-$table = Richardhj\Isotope\Model\Stock::getTable();
+$table = Richardhj\Isotope\SimpleStockmanagement\Model\Stock::getTable();
 
 
 /**
@@ -96,7 +96,7 @@ $GLOBALS['TL_DCA'][$table] = [
         'source'                => [
             'label'     => &$GLOBALS['TL_LANG'][$table]['source'],
             'inputType' => 'select',
-            'default'   => Richardhj\Isotope\Model\Stock::STOCKMANAGEMENT_SOURCE_BACKEND,
+            'default'   => Richardhj\Isotope\SimpleStockmanagement\Model\Stock::STOCKMANAGEMENT_SOURCE_BACKEND,
             'reference' => &$GLOBALS['TL_LANG'][$table]['source_options'],
             'sql'       => "varchar(64) NOT NULL default ''",
         ],

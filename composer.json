@@ -27,14 +27,14 @@
         "menatwork/contao-multicolumnwizard": "^3.0"
     },
     "autoload": {
-        "psr-0": {
-            "Isotope\\": "system/modules/isotope_simple_stockmanagement/src/"
+        "psr-4": {
+            "Richardhj\\Isotope\\SimpleStockmanagement\\": "src/"
         }
     },
     "extra": {
         "contao": {
             "sources": {
-                "system/modules/isotope_simple_stockmanagement": "system/modules/isotope_simple_stockmanagement"
+                "contao": "system/modules/isotope_simple_stockmanagement"
             }
         }
     }

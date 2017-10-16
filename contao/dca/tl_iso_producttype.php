@@ -12,8 +12,6 @@
  */
 
 
-use NotificationCenter\Model\Notification;
-
 $table = Isotope\Model\ProductType::getTable();
 
 

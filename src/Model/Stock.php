@@ -12,7 +12,7 @@
  */
 
 
-namespace Richardhj\Isotope\Model;
+namespace Richardhj\Isotope\SimpleStockmanagement\Model;
 
 use Contao\Model;
 

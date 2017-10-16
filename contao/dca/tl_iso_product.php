@@ -21,7 +21,7 @@ $table = Isotope\Model\Product::getTable();
 $GLOBALS['TL_DCA'][$table]['fields']['stock'] = [
     'label'        => &$GLOBALS['TL_LANG'][$table]['stock'],
     'inputType'    => 'dcaWizard',
-    'foreignTable' => Richardhj\Isotope\Model\Stock::getTable(),
+    'foreignTable' => Richardhj\Isotope\SimpleStockmanagement\Model\Stock::getTable(),
     'params'       => [
         'mode' => 2,
         'pid'  => Contao\Input::get('id'),
@@ -33,7 +33,7 @@ $GLOBALS['TL_DCA'][$table]['fields']['stock'] = [
         'orderField'      => 'tstamp ASC',
         'showOperations'  => true,
         'operations'      => ['show'],
-        'listCallback'    => ['Richardhj\Isotope\SimpleStockmanagement\Dca', 'generateWizardList'],
+        'listCallback'    => [Richardhj\Isotope\SimpleStockmanagement\BackendIntegration\Dca::class, 'generateWizardList'],
         'tl_class'        => 'clr',
     ],
     'attributes' => [

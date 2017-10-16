@@ -15,36 +15,36 @@
 /**
  * Back end modules
  */
-$GLOBALS['BE_MOD']['isotope']['iso_products']['tables'][] = \Richardhj\Isotope\Model\Stock::getTable();
+$GLOBALS['BE_MOD']['isotope']['iso_products']['tables'][] = \Richardhj\Isotope\SimpleStockmanagement\Model\Stock::getTable();
 
 
 /**
  * Models
  */
-$GLOBALS['TL_MODELS'][\Richardhj\Isotope\Model\Stock::getTable()] = 'Richardhj\Isotope\Model\Stock';
+$GLOBALS['TL_MODELS'][\Richardhj\Isotope\SimpleStockmanagement\Model\Stock::getTable()] = 'Richardhj\Isotope\SimpleStockmanagement\Model\Stock';
 
 
 /**
  * Hooks
  */
 $GLOBALS['ISO_HOOKS']['addProductToCollection'][] = [
-    'Richardhj\Isotope\SimpleStockmanagement\Hooks',
+    \Richardhj\Isotope\SimpleStockmanagement\FrontendIntegration\Hooks::class,
     'checkBeforeAddToCollection',
 ];
 $GLOBALS['ISO_HOOKS']['updateItemInCollection'][] = [
-    'Richardhj\Isotope\SimpleStockmanagement\Hooks',
+    \Richardhj\Isotope\SimpleStockmanagement\FrontendIntegration\Hooks::class,
     'checkBeforeUpdateCollection',
 ];
 $GLOBALS['ISO_HOOKS']['itemIsAvailable'][] = [
-    'Richardhj\Isotope\SimpleStockmanagement\Hooks',
+    \Richardhj\Isotope\SimpleStockmanagement\FrontendIntegration\Hooks::class,
     'checkItemIsAvailable',
 ];
 $GLOBALS['ISO_HOOKS']['preCheckout'][] = [
-    'Richardhj\Isotope\SimpleStockmanagement\Hooks',
+    \Richardhj\Isotope\SimpleStockmanagement\FrontendIntegration\Hooks::class,
     'checkBeforeCheckout',
 ];
 $GLOBALS['ISO_HOOKS']['postCheckout'][] = [
-    'Richardhj\Isotope\SimpleStockmanagement\Hooks',
+    \Richardhj\Isotope\SimpleStockmanagement\FrontendIntegration\Hooks::class,
     'updateStockPostCheckout',
 ];
 

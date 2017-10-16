@@ -12,13 +12,13 @@
  */
 
 
-namespace Richardhj\Isotope\SimpleStockmanagement;
+namespace Richardhj\Isotope\SimpleStockmanagement\BackendIntegration;
 
 use DOMDocument;
 use Contao\BackendTemplate;
 use Contao\Image;
 use Contao\System;
-use Isotope\Model\Stock;
+use Richardhj\Isotope\SimpleStockmanagement\Model\Stock;
 
 
 /**
