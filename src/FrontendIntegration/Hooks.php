@@ -16,6 +16,7 @@ namespace Richardhj\Isotope\SimpleStockManagement\FrontendIntegration;
 
 use Contao\Controller;
 use Contao\Database;
+use Contao\Model;
 use Isotope\Message;
 use Isotope\Model\Product;
 use Isotope\Model\ProductCollection;
@@ -27,6 +28,7 @@ use Richardhj\Isotope\SimpleStockManagement\Model\Stock;
 
 /**
  * Class Hooks
+ *
  * @package Isotope\SimpleStockmanagement
  */
 class Hooks
@@ -35,7 +37,7 @@ class Hooks
     /**
      * @category ISO_HOOKS: addProductToCollection
      *
-     * @param Product|\Model    $product
+     * @param Product|Model     $product
      * @param int               $quantity
      * @param ProductCollection $collection
      *
@@ -44,13 +46,12 @@ class Hooks
     public function checkBeforeAddToCollection(Product $product, $quantity, ProductCollection $collection)
     {
         $productType = $product->getRelated('type');
-
         if (!$productType->stockmanagement_active) {
             return $quantity;
         }
 
-        $stock = Stock::getStockForProduct($product->id);
         $quantityInCart = 0;
+        $stock          = Stock::getStockForProduct($product->id);
 
         foreach ($collection->getItems() as $item) {
             if ($item->product_id === $product->id) {
@@ -60,8 +61,7 @@ class Hooks
 
         if (false === $stock) {
             return $quantity;
-        }
-        elseif (0 === $stock) {
+        } elseif (0 === $stock) {
             Message::addError($GLOBALS['TL_LANG']['MSC']['simpleStockmanagement']['productUnavailable']);
 
             return 0;
@@ -79,12 +79,11 @@ class Hooks
     /**
      * @category ISO_HOOKS: updateItemInCollection
      *
-     * @param ProductCollectionItem|\Model $item
-     * @param array                        $set
-     * @param ProductCollection            $collection
+     * @param ProductCollectionItem|Model $item
+     * @param array                       $set
+     * @param ProductCollection           $collection
      *
      * @return array
-     *
      */
     public function checkBeforeUpdateCollection(ProductCollectionItem $item, $set, ProductCollection $collection)
     {
@@ -92,8 +91,8 @@ class Hooks
             return $set;
         }
 
-        /** @var Product|\Model $product */
-        $product = $item->getProduct();
+        /** @var Product|Model $product */
+        $product     = $item->getProduct();
         $productType = $product->getRelated('type');
 
         if (!$productType->stockmanagement_active) {
@@ -115,14 +114,14 @@ class Hooks
     /**
      * @category ISO_HOOKS: itemIsAvailable
      *
-     * @param ProductCollectionItem|\Model $item
+     * @param ProductCollectionItem|Model $item
      *
      * @return false|null Return false but never true
      */
     public function checkItemIsAvailable(ProductCollectionItem $item)
     {
-        /** @var Product|\Model $product */
-        $product = $item->getProduct();
+        /** @var Product|Model $product */
+        $product     = $item->getProduct();
         $productType = $product->getRelated('type');
 
         if (!$productType->stockmanagement_active) {
@@ -130,7 +129,6 @@ class Hooks
         }
 
         $stock = Stock::getStockForProduct($product->id);
-
         if (false !== $stock && $stock < 1) {
             return false;
         }
@@ -150,16 +148,15 @@ class Hooks
     public function checkBeforeCheckout(ProductCollection\Order $order, Checkout $checkout)
     {
         foreach ($order->getItems() as $item) {
-            /** @var Product|\Model $product */
-            $product = $item->getProduct();
+            /** @var Product|Model $product */
+            $product     = $item->getProduct();
             $productType = $product->getRelated('type');
-            $stock = Stock::getStockForProduct($product->id);
+            $stock       = Stock::getStockForProduct($product->id);
 
             if ($productType->stockmanagement_active && false !== $stock && $item->quantity > $stock) {
                 Message::addError($GLOBALS['TL_LANG']['MSC']['simpleStockmanagement']['productQuantityUnavailable']);
 
                 if ($checkout->iso_cart_jumpTo > 0) {
-
                     /** @type \PageModel $jumpTo */
                     $jumpTo = \PageModel::findPublishedById($checkout->iso_cart_jumpTo);
 
@@ -187,19 +184,19 @@ class Hooks
     public function updateStockPostCheckout(ProductCollection\Order $order)
     {
         foreach ($order->getItems() as $item) {
-            /** @var Product|\Model $product */
-            $product = $item->getProduct();
+            /** @var Product|Model $product */
+            $product     = $item->getProduct();
             $productType = $product->getRelated('type');
 
             if ($productType->stockmanagement_active) {
                 // Book stock change
-                /** @var Stock|\Model $stockChange */
-                $stockChange = new Stock();
-                $stockChange->tstamp = time();
-                $stockChange->pid = $product->id;
+                /** @var Stock|Model $stockChange */
+                $stockChange                        = new Stock();
+                $stockChange->tstamp                = time();
+                $stockChange->pid                   = $product->id;
                 $stockChange->product_collection_id = $order->id;
-                $stockChange->quantity = -1 * (int)$item->quantity;
-                $stockChange->source = Stock::STOCKMANAGEMENT_SOURCE_ORDER;
+                $stockChange->quantity              = -1 * (int)$item->quantity;
+                $stockChange->source                = Stock::STOCKMANAGEMENT_SOURCE_ORDER;
                 $stockChange->save();
 
                 // Fetch current stock
@@ -207,7 +204,7 @@ class Hooks
 
                 // Disable product if necessary
                 if ($productType->stockmanagement_disableProduct && false !== $stock && $stock < 1) {
-                    // Changed behavior. See #2
+                    // Do not use the model to persist. See #2
                     Database::getInstance()
                         ->prepare("UPDATE {$product::getTable()} SET published='' WHERE id=?")
                         ->execute($product->id);
@@ -238,14 +235,15 @@ class Hooks
 
 
     /**
-     * @param Product|\Model                 $product
-     * @param ProductCollection\Order|\Model $order
+     * @param Product|Model                 $product
+     * @param ProductCollection\Order|Model $order
      *
      * @return array
      */
     private static function createStockChangeNotificationTokens(Product $product, ProductCollection\Order $order)
     {
         $tokens = [];
+
         $tokens['admin_email'] = $GLOBALS['TL_ADMIN_EMAIL'];
 
         $config = $order->getRelated('config_id');

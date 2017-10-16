@@ -14,6 +14,8 @@
 
 namespace Richardhj\Isotope\SimpleStockManagement\BackendIntegration;
 
+use Database_Result;
+use DcaWizard;
 use DOMDocument;
 use Contao\BackendTemplate;
 use Contao\Image;
@@ -23,22 +25,23 @@ use Richardhj\Isotope\SimpleStockManagement\Model\Stock;
 
 /**
  * Class Dca
+ *
  * @package Isotope\SimpleStockmanagement
  */
 class Dca
 {
 
     /**
-     * @param \Database_Result $records
-     * @param string           $id
-     * @param \DcaWizard       $dcaWizard
+     * @param Database_Result $records
+     * @param string          $id
+     * @param DcaWizard       $dcaWizard
      *
      * @return string
      */
     public function generateWizardList($records, $id, $dcaWizard)
     {
         $return = '';
-        $rows = $dcaWizard->getRows($records);
+        $rows   = $dcaWizard->getRows($records);
 
         // Alter the rows
         System::loadLanguageFile('tl_iso_product_collection');
@@ -64,12 +67,12 @@ class Dca
             $rows
         );
 
-        if ($rows) {
-            $template = new BackendTemplate('be_widget_dcawizard');
-            $template->headerFields = $dcaWizard->getHeaderFields();
-            $template->hasRows = !empty($rows);
-            $template->rows = $rows;
-            $template->fields = $dcaWizard->fields;
+        if (!empty($rows)) {
+            $template                 = new BackendTemplate('be_widget_dcawizard');
+            $template->headerFields   = $dcaWizard->getHeaderFields();
+            $template->hasRows        = !empty($rows);
+            $template->rows           = $rows;
+            $template->fields         = $dcaWizard->fields;
             $template->showOperations = $dcaWizard->showOperations;
 
             if ($dcaWizard->showOperations) {

@@ -24,21 +24,21 @@ $GLOBALS['TL_LANG'][$table]['stock_legend'] = 'Create a new stock change';
 /**
  * Fields
  */
-$GLOBALS['TL_LANG'][$table]['pid'][0] = 'Product';
+$GLOBALS['TL_LANG'][$table]['pid'][0]                   = 'Product';
 $GLOBALS['TL_LANG'][$table]['product_collection_id'][0] = 'Order';
-$GLOBALS['TL_LANG'][$table]['quantity'][0] = 'Quantity';
-$GLOBALS['TL_LANG'][$table]['quantity'][1] = 'Enter the income of stock (positive number) or the outcome of stock (negative number).';
-$GLOBALS['TL_LANG'][$table]['source'][0] = 'Source';
-$GLOBALS['TL_LANG'][$table]['comment'][0] = 'Comment';
-$GLOBALS['TL_LANG'][$table]['comment'][1] = 'Enter a comment optionally.';
+$GLOBALS['TL_LANG'][$table]['quantity'][0]              = 'Quantity';
+$GLOBALS['TL_LANG'][$table]['quantity'][1]              = 'Enter the income of stock (positive number) or the outcome of stock (negative number).';
+$GLOBALS['TL_LANG'][$table]['source'][0]                = 'Source';
+$GLOBALS['TL_LANG'][$table]['comment'][0]               = 'Comment';
+$GLOBALS['TL_LANG'][$table]['comment'][1]               = 'Enter a comment optionally.';
 
 
 /**
  * References
  */
 $GLOBALS['TL_LANG'][$table]['source_options'][Richardhj\Isotope\SimpleStockManagement\Model\Stock::STOCKMANAGEMENT_SOURCE_BACKEND] = 'Backend';
-$GLOBALS['TL_LANG'][$table]['source_options'][Richardhj\Isotope\SimpleStockManagement\Model\Stock::STOCKMANAGEMENT_SOURCE_ORDER] = 'Order';
-$GLOBALS['TL_LANG'][$table]['source_options'][Richardhj\Isotope\SimpleStockManagement\Model\Stock::STOCKMANAGEMENT_SOURCE_IMPORT] = 'Import';
+$GLOBALS['TL_LANG'][$table]['source_options'][Richardhj\Isotope\SimpleStockManagement\Model\Stock::STOCKMANAGEMENT_SOURCE_ORDER]   = 'Order';
+$GLOBALS['TL_LANG'][$table]['source_options'][Richardhj\Isotope\SimpleStockManagement\Model\Stock::STOCKMANAGEMENT_SOURCE_IMPORT]  = 'Import';
 
 
 /**

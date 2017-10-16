@@ -19,6 +19,7 @@ use Contao\Model;
 
 /**
  * Class Stock
+ *
  * @property int    $tstamp
  * @property int    $pid
  * @property int    $product_collection_id
@@ -33,9 +34,9 @@ class Stock extends Model
     /**
      * Stock management sources
      */
-    const STOCKMANAGEMENT_SOURCE_ORDER = 'order';
+    const STOCKMANAGEMENT_SOURCE_ORDER   = 'order';
     const STOCKMANAGEMENT_SOURCE_BACKEND = 'backend';
-    const STOCKMANAGEMENT_SOURCE_IMPORT = 'import';
+    const STOCKMANAGEMENT_SOURCE_IMPORT  = 'import';
 
 
     /**
@@ -69,7 +70,6 @@ class Stock extends Model
     public static function getStockForProduct($product)
     {
         $entries = static::findForProduct($product);
-
         if (null === $entries) {
             return false;
         }

@@ -15,7 +15,7 @@
 /**
  * Miscellaneous
  */
-$GLOBALS['TL_LANG']['MSC']['simpleStockmanagement']['productUnavailable'] = 'Unfortunately, this product is unavailable.';
-$GLOBALS['TL_LANG']['MSC']['simpleStockmanagement']['maxQuantityAdded'] = 'The maximum of available products was added to the cart.';
-$GLOBALS['TL_LANG']['MSC']['simpleStockmanagement']['maxQuantityUpdated'] = 'The quantity was changed to the product quantity available.';
+$GLOBALS['TL_LANG']['MSC']['simpleStockmanagement']['productUnavailable']         = 'Unfortunately, this product is unavailable.';
+$GLOBALS['TL_LANG']['MSC']['simpleStockmanagement']['maxQuantityAdded']           = 'The maximum of available products was added to the cart.';
+$GLOBALS['TL_LANG']['MSC']['simpleStockmanagement']['maxQuantityUpdated']         = 'The quantity was changed to the product quantity available.';
 $GLOBALS['TL_LANG']['MSC']['simpleStockmanagement']['productQuantityUnavailable'] = 'The requested product quantity is unavailable.';

@@ -33,10 +33,13 @@ $GLOBALS['TL_DCA'][$table]['fields']['stock'] = [
         'orderField'      => 'tstamp ASC',
         'showOperations'  => true,
         'operations'      => ['show'],
-        'listCallback'    => [Richardhj\Isotope\SimpleStockManagement\BackendIntegration\Dca::class, 'generateWizardList'],
+        'listCallback'    => [
+            Richardhj\Isotope\SimpleStockManagement\BackendIntegration\Dca::class,
+            'generateWizardList',
+        ],
         'tl_class'        => 'clr',
     ],
-    'attributes' => [
+    'attributes'   => [
         'legend' => 'inventory_legend',
     ],
 ];

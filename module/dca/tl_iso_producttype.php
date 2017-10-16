@@ -20,13 +20,14 @@ $table = Isotope\Model\ProductType::getTable();
  */
 $GLOBALS['TL_DCA'][$table]['palettes']['__selector__'][] = 'stockmanagement_active';
 $GLOBALS['TL_DCA'][$table]['palettes']['__selector__'][] = 'stockmanagement_notification';
-$GLOBALS['TL_DCA'][$table]['palettes']['standard'] .= ';{stockmanagement_legend},stockmanagement_active';
+$GLOBALS['TL_DCA'][$table]['palettes']['standard']       .= ';{stockmanagement_legend},stockmanagement_active';
 
 
 /**
  * SubPalettes
  */
-$GLOBALS['TL_DCA'][$table]['subpalettes']['stockmanagement_active'] = 'stockmanagement_disableProduct,stockmanagement_notification';
+$GLOBALS['TL_DCA'][$table]['subpalettes']['stockmanagement_active']       =
+    'stockmanagement_disableProduct,stockmanagement_notification';
 $GLOBALS['TL_DCA'][$table]['subpalettes']['stockmanagement_notification'] = 'stockmanagement_notifications';
 
 
@@ -77,7 +78,8 @@ $GLOBALS['TL_DCA'][$table]['fields']['stockmanagement_notifications'] = [
                 'options_callback' => function () {
                     /** @var NotificationCenter\Model\Notification|\Model\Collection $notifications */
                     /** @noinspection PhpUndefinedMethodInspection */
-                    $notifications = NotificationCenter\Model\Notification::findBy('type', 'iso_stockmanagement_change');
+                    $notifications =
+                        NotificationCenter\Model\Notification::findBy('type', 'iso_stockmanagement_change');
 
                     if (null === $notifications) {
                         return [];
