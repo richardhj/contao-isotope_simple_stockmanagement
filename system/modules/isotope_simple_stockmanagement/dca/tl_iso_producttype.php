@@ -12,12 +12,9 @@
  */
 
 
-use Isotope\Model\ProductType;
 use NotificationCenter\Model\Notification;
 
-
-/** @noinspection PhpUndefinedMethodInspection */
-$table = ProductType::getTable();
+$table = Isotope\Model\ProductType::getTable();
 
 
 /**
@@ -80,9 +77,9 @@ $GLOBALS['TL_DCA'][$table]['fields']['stockmanagement_notifications'] = [
                     'mandatory' => true,
                 ],
                 'options_callback' => function () {
-                    /** @var Notification|\Model\Collection $notifications */
+                    /** @var NotificationCenter\Model\Notification|\Model\Collection $notifications */
                     /** @noinspection PhpUndefinedMethodInspection */
-                    $notifications = Notification::findBy('type', 'iso_stockmanagement_change');
+                    $notifications = NotificationCenter\Model\Notification::findBy('type', 'iso_stockmanagement_change');
 
                     if (null === $notifications) {
                         return [];

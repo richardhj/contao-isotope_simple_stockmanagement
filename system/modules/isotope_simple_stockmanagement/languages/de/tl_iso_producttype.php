@@ -12,7 +12,6 @@
  */
 
 
-/** @noinspection PhpUndefinedMethodInspection */
 $table = Isotope\Model\ProductType::getTable();
 
 

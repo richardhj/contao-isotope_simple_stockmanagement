@@ -12,7 +12,9 @@
  */
 
 
-namespace Isotope\Model;
+namespace Richardhj\Isotope\Model;
+
+use Contao\Model;
 
 
 /**
@@ -25,7 +27,7 @@ namespace Isotope\Model;
  * @property string $comment
  * @package Isotope\Model
  */
-class Stock extends \Model
+class Stock extends Model
 {
 
     /**
@@ -53,7 +55,6 @@ class Stock extends \Model
      */
     public static function findForProduct($product)
     {
-        /** @noinspection PhpUndefinedMethodInspection */
         return static::findBy('pid', $product);
     }
 

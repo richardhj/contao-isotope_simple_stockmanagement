@@ -12,14 +12,12 @@
  */
 
 
-/** @noinspection PhpUndefinedMethodInspection */
-$table = Isotope\Model\Stock::getTable();
+$table = Richardhj\Isotope\Model\Stock::getTable();
 
 
 /**
  * DCA
  */
-/** @noinspection PhpUndefinedMethodInspection */
 $GLOBALS['TL_DCA'][$table] = [
 
     // Config
@@ -98,7 +96,7 @@ $GLOBALS['TL_DCA'][$table] = [
         'source'                => [
             'label'     => &$GLOBALS['TL_LANG'][$table]['source'],
             'inputType' => 'select',
-            'default'   => Isotope\Model\Stock::STOCKMANAGEMENT_SOURCE_BACKEND,
+            'default'   => Richardhj\Isotope\Model\Stock::STOCKMANAGEMENT_SOURCE_BACKEND,
             'reference' => &$GLOBALS['TL_LANG'][$table]['source_options'],
             'sql'       => "varchar(64) NOT NULL default ''",
         ],

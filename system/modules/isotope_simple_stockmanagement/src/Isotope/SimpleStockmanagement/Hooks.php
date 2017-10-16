@@ -12,14 +12,14 @@
  */
 
 
-namespace Isotope\SimpleStockmanagement;
+namespace Richardhj\Isotope\SimpleStockmanagement;
 
+use Contao\Controller;
+use Contao\Database;
 use Isotope\Message;
-use Isotope\Model\Config;
 use Isotope\Model\Product;
 use Isotope\Model\ProductCollection;
 use Isotope\Model\ProductCollectionItem;
-use Isotope\Model\ProductType;
 use Isotope\Model\Stock;
 use Isotope\Module\Checkout;
 use NotificationCenter\Model\Notification;
@@ -43,7 +43,6 @@ class Hooks
      */
     public function checkBeforeAddToCollection(Product $product, $quantity, ProductCollection $collection)
     {
-        /** @var ProductType|\Model $productType */
         $productType = $product->getRelated('type');
 
         if (!$productType->stockmanagement_active) {
@@ -95,7 +94,6 @@ class Hooks
 
         /** @var Product|\Model $product */
         $product = $item->getProduct();
-        /** @var ProductType|\Model $productType */
         $productType = $product->getRelated('type');
 
         if (!$productType->stockmanagement_active) {
@@ -125,7 +123,6 @@ class Hooks
     {
         /** @var Product|\Model $product */
         $product = $item->getProduct();
-        /** @var ProductType|\Model $productType */
         $productType = $product->getRelated('type');
 
         if (!$productType->stockmanagement_active) {
@@ -168,7 +165,7 @@ class Hooks
 
                     if (null !== $jumpTo) {
                         $jumpTo->loadDetails();
-                        \Controller::redirect($jumpTo->getFrontendUrl(null, $jumpTo->language));
+                        Controller::redirect($jumpTo->getFrontendUrl(null, $jumpTo->language));
                     }
                 }
 
@@ -211,7 +208,7 @@ class Hooks
                 // Disable product if necessary
                 if ($productType->stockmanagement_disableProduct && false !== $stock && $stock < 1) {
                     // Changed behavior. See #2
-                    \Database::getInstance()
+                    Database::getInstance()
                         ->prepare("UPDATE {$product::getTable()} SET published='' WHERE id=?")
                         ->execute($product->id);
                 }
@@ -251,7 +248,6 @@ class Hooks
         $tokens = [];
         $tokens['admin_email'] = $GLOBALS['TL_ADMIN_EMAIL'];
 
-        /** @var Config|\Model $config */
         $config = $order->getRelated('config_id');
 
         foreach ($product->row() as $k => $v) {

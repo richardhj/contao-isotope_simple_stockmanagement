@@ -12,8 +12,12 @@
  */
 
 
-namespace Isotope\SimpleStockmanagement;
+namespace Richardhj\Isotope\SimpleStockmanagement;
 
+use DOMDocument;
+use Contao\BackendTemplate;
+use Contao\Image;
+use Contao\System;
 use Isotope\Model\Stock;
 
 
@@ -37,7 +41,7 @@ class Dca
         $rows = $dcaWizard->getRows($records);
 
         // Alter the rows
-        \System::loadLanguageFile('tl_iso_product_collection');
+        System::loadLanguageFile('tl_iso_product_collection');
         $rows = array_map(
             function ($row) {
                 // Force an algebraic sign for quantity
@@ -49,7 +53,7 @@ class Dca
                     // Collection ID
                     $row['product_collection_id'],
                     // Link
-                    \Image::getHtml('edit.gif').$row['product_collection_id'],
+                    Image::getHtml('edit.gif').$row['product_collection_id'],
                     // Collection edit description
                     sprintf($GLOBALS['TL_LANG']['tl_iso_product_collection']['edit'][1], $row['product_collection_id']),
                     REQUEST_TOKEN
@@ -61,7 +65,7 @@ class Dca
         );
 
         if ($rows) {
-            $template = new \BackendTemplate('be_widget_dcawizard');
+            $template = new BackendTemplate('be_widget_dcawizard');
             $template->headerFields = $dcaWizard->getHeaderFields();
             $template->hasRows = !empty($rows);
             $template->rows = $rows;
@@ -76,7 +80,7 @@ class Dca
                 return $dcaWizard->generateRowOperation($operation, $row);
             };
 
-            $dom = new \DOMDocument('1.0', 'utf-8');
+            $dom = new DOMDocument('1.0', 'utf-8');
             $dom->loadHTML($template->parse());
             $return = $dom->saveHTML($dom->getElementsByTagName('table')->item(0));
         }
