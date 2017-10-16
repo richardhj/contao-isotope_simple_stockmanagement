@@ -34,7 +34,7 @@
     "extra": {
         "contao": {
             "sources": {
-                "contao": "system/modules/isotope_simple_stockmanagement"
+                "module": "system/modules/isotope_simple_stockmanagement"
             }
         }
     }
