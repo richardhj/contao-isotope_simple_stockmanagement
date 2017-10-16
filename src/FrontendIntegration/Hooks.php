@@ -82,11 +82,11 @@ class Hooks
      *
      * @param ProductCollectionItem|Model $item
      * @param array                       $set
-     * @param ProductCollection           $collection
      *
      * @return array
+     * @internal param ProductCollection $collection
      */
-    public function checkBeforeUpdateCollection(ProductCollectionItem $item, $set, ProductCollection $collection)
+    public function checkBeforeUpdateCollection(ProductCollectionItem $item, $set)
     {
         if (empty($set['quantity'])) {
             return $set;
