@@ -23,7 +23,8 @@
     "require": {
         "php": ">=5.3",
         "contao/core": "~3.2",
-        "isotope/isotope-core": "~2.3"
+        "isotope/isotope-core": "~2.3",
+        "menatwork/contao-multicolumnwizard": "^3.0"
     },
     "autoload": {
         "psr-0": {
