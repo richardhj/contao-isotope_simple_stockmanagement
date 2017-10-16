@@ -11,15 +11,11 @@ Provides the possibility to send messages to the shop admin by configurable stoc
 
 ## Install
 
-### Via Composer
+Via Composer
 
 ``` bash
 $ composer require richardhj/contao-isotope_simple_stockmanagement
 ```
-
-### Manually
-
-Install https://github.com/terminal42/contao-NamespaceClassLoader (available via ER) and copy the directory to the system.
 
 ## Usage
 
