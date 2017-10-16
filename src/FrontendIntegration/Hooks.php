@@ -12,7 +12,7 @@
  */
 
 
-namespace Richardhj\Isotope\SimpleStockmanagement\FrontendIntegration;
+namespace Richardhj\Isotope\SimpleStockManagement\FrontendIntegration;
 
 use Contao\Controller;
 use Contao\Database;
@@ -22,7 +22,7 @@ use Isotope\Model\ProductCollection;
 use Isotope\Model\ProductCollectionItem;
 use Isotope\Module\Checkout;
 use NotificationCenter\Model\Notification;
-use Richardhj\Isotope\SimpleStockmanagement\Model\Stock;
+use Richardhj\Isotope\SimpleStockManagement\Model\Stock;
 
 
 /**

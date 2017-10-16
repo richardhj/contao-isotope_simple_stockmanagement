@@ -28,7 +28,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Richardhj\\Isotope\\SimpleStockmanagement\\": "src/"
+            "Richardhj\\Isotope\\SimpleStockManagement\\": "src/"
         }
     },
     "extra": {
