@@ -224,7 +224,7 @@ class Hooks
                             $notificationCenter = Notification::findByPk($notification['nc_id']);
 
                             if (null !== $notificationCenter) {
-                                $notificationCenter->send(self::createStockChangeNotifictionTokens($product, $order));
+                                $notificationCenter->send(self::createStockChangeNotificationTokens($product, $order));
                             }
 
                             // Do not send multiple notifications
@@ -243,7 +243,7 @@ class Hooks
      *
      * @return array
      */
-    private static function createStockChangeNotifictionTokens(Product $product, ProductCollection\Order $order)
+    private static function createStockChangeNotificationTokens(Product $product, ProductCollection\Order $order)
     {
         $tokens = [];
         $tokens['admin_email'] = $GLOBALS['TL_ADMIN_EMAIL'];
