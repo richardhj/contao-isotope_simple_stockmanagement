@@ -24,7 +24,8 @@
         "php": "^5.3 || ^7.0",
         "contao/core-bundle": "^3.2 || ^4.1",
         "isotope/isotope-core": "^2.3",
-        "menatwork/contao-multicolumnwizard": "^3.0"
+        "menatwork/contao-multicolumnwizard": "^3.0",
+        "terminal42/contao-dcawizard": "^2.3.4"
     },
     "autoload": {
         "psr-4": {
