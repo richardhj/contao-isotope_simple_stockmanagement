@@ -17,6 +17,7 @@ namespace Richardhj\Isotope\SimpleStockManagement\FrontendIntegration;
 use Contao\Controller;
 use Contao\Database;
 use Contao\Model;
+use Contao\PageModel;
 use Isotope\Message;
 use Isotope\Model\Product;
 use Isotope\Model\ProductCollection;
@@ -157,8 +158,8 @@ class Hooks
                 Message::addError($GLOBALS['TL_LANG']['MSC']['simpleStockmanagement']['productQuantityUnavailable']);
 
                 if ($checkout->iso_cart_jumpTo > 0) {
-                    /** @type \PageModel $jumpTo */
-                    $jumpTo = \PageModel::findPublishedById($checkout->iso_cart_jumpTo);
+                    /** @type PageModel $jumpTo */
+                    $jumpTo = PageModel::findPublishedById($checkout->iso_cart_jumpTo);
 
                     if (null !== $jumpTo) {
                         $jumpTo->loadDetails();
