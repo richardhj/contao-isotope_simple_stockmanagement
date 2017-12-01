@@ -74,6 +74,7 @@ class Dca
             $template->rows           = $rows;
             $template->fields         = $dcaWizard->fields;
             $template->showOperations = $dcaWizard->showOperations;
+            $template->foreignTable = 'tl_iso_stock';
 
             if ($dcaWizard->showOperations) {
                 $template->operations = $dcaWizard->getActiveRowOperations();
