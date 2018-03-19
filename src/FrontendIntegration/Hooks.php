@@ -18,6 +18,7 @@ use Contao\Controller;
 use Contao\Database;
 use Contao\Model;
 use Contao\PageModel;
+use Contao\System;
 use Isotope\Message;
 use Isotope\Model\Product;
 use Isotope\Model\ProductCollection;
@@ -227,6 +228,16 @@ class Hooks
 
                 // Send stock change notifications
                 if ($productType->stockmanagement_notification) {
+                    if (false === $stock) {
+                        System::log(
+                            'Product ID '.$product->id.' haven\'t stocked up yet. Please set initial stock.',
+                            __METHOD__,
+                            TL_GENERAL
+                        );
+
+                        return;
+                    }
+
                     $notifications = deserialize($productType->stockmanagement_notifications);
 
                     foreach ($notifications as $notification) {
