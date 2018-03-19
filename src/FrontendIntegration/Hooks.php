@@ -3,12 +3,12 @@
 /**
  * This file is part of richardhj/contao-isotope_simple_stockmanagement.
  *
- * Copyright (c) 2016-2017 Richard Henkenjohann
+ * Copyright (c) 2016-2018 Richard Henkenjohann
  *
  * @package   richardhj/contao-isotope_simple_stockmanagement
  * @author    Richard Henkenjohann <richardhenkenjohann@googlemail.com>
- * @copyright 2016-2017 Richard Henkenjohann
- * @license   https://github.com/richardhj/richardhj/contao-isotope_simple_stockmanagement/blob/master/LICENSE LGPL-3.0
+ * @copyright 2016-2018 Richard Henkenjohann
+ * @license   https://github.com/richardhj/contao-isotope_simple_stockmanagement/blob/master/LICENSE LGPL-3.0
  */
 
 
@@ -43,18 +43,20 @@ class Hooks
      * @param ProductCollection $collection
      *
      * @return int
+     *
+     * @throws \Exception If type is not a related field of tl_iso_product
      */
     public function checkBeforeAddToCollection(Product $product, $quantity, ProductCollection $collection)
     {
         $productType = $product->getRelated('type');
-        if (!$productType->stockmanagement_active) {
+        if (null === $productType || !$productType->stockmanagement_active) {
             return $quantity;
         }
 
         $quantityInCart = 0;
         $stock          = Stock::getStockForProduct($product->id);
 
-        foreach ($collection->getItems() as $item) {
+        foreach ((array)$collection->getItems() as $item) {
             if ($item->product_id === $product->id) {
                 $quantityInCart += $item->quantity;
             }
@@ -62,12 +64,14 @@ class Hooks
 
         if (false === $stock) {
             return $quantity;
-        } elseif (0 === $stock) {
+        }
+        if (0 === $stock) {
             Message::addError($GLOBALS['TL_LANG']['MSC']['simpleStockmanagement']['productUnavailable']);
 
             return 0;
 
-        } elseif ($quantity + $quantityInCart > $stock) {
+        }
+        if ($quantity + $quantityInCart > $stock) {
             Message::addInfo($GLOBALS['TL_LANG']['MSC']['simpleStockmanagement']['maxQuantityAdded']);
 
             return $stock - $quantityInCart;
@@ -85,6 +89,8 @@ class Hooks
      *
      * @return array
      * @internal param ProductCollection $collection
+     *
+     * @throws \Exception If type is not a related field of tl_iso_product
      */
     public function checkBeforeUpdateCollection(ProductCollectionItem $item, $set)
     {
@@ -96,7 +102,7 @@ class Hooks
         $product     = $item->getProduct();
         $productType = $product->getRelated('type');
 
-        if (!$productType->stockmanagement_active) {
+        if (null === $productType || !$productType->stockmanagement_active) {
             return $set;
         }
 
@@ -118,6 +124,8 @@ class Hooks
      * @param ProductCollectionItem|Model $item
      *
      * @return false|null Return false but never true
+     *
+     * @throws \Exception If type is not a related field of tl_iso_product
      */
     public function checkItemIsAvailable(ProductCollectionItem $item)
     {
@@ -125,7 +133,7 @@ class Hooks
         $product     = $item->getProduct();
         $productType = $product->getRelated('type');
 
-        if (!$productType->stockmanagement_active) {
+        if (null === $productType || !$productType->stockmanagement_active) {
             return null;
         }
 
@@ -145,6 +153,8 @@ class Hooks
      * @param Checkout                $checkout
      *
      * @return bool
+     *
+     * @throws \Exception If type is not a related field of tl_iso_product
      */
     public function checkBeforeCheckout(ProductCollection\Order $order, Checkout $checkout)
     {
@@ -154,7 +164,9 @@ class Hooks
             $productType = $product->getRelated('type');
             $stock       = Stock::getStockForProduct($product->id);
 
-            if ($productType->stockmanagement_active && false !== $stock && $item->quantity > $stock) {
+            if (null !== $productType
+                && ($productType->stockmanagement_active && false !== $stock
+                    && $item->quantity > $stock)) {
                 Message::addError($GLOBALS['TL_LANG']['MSC']['simpleStockmanagement']['productQuantityUnavailable']);
 
                 if ($checkout->iso_cart_jumpTo > 0) {
@@ -181,6 +193,8 @@ class Hooks
      * @param ProductCollection\Order $order
      *
      * @internal param array $tokens
+     *
+     * @throws \Exception If type is not a related field of tl_iso_product
      */
     public function updateStockPostCheckout(ProductCollection\Order $order)
     {
@@ -189,7 +203,7 @@ class Hooks
             $product     = $item->getProduct();
             $productType = $product->getRelated('type');
 
-            if ($productType->stockmanagement_active) {
+            if (null !== $productType && $productType->stockmanagement_active) {
                 // Book stock change
                 /** @var Stock|Model $stockChange */
                 $stockChange                        = new Stock();
@@ -240,6 +254,8 @@ class Hooks
      * @param ProductCollection\Order|Model $order
      *
      * @return array
+     *
+     * @throws \Exception If type is not a related field of tl_iso_product
      */
     private static function createStockChangeNotificationTokens(Product $product, ProductCollection\Order $order)
     {
@@ -257,8 +273,10 @@ class Hooks
             $tokens['order_'.$k] = $v;
         }
 
-        foreach ($config->row() as $k => $v) {
-            $tokens['config_'.$k] = $v;
+        if (null !== $config) {
+            foreach ((array)$config->row() as $k => $v) {
+                $tokens['config_'.$k] = $v;
+            }
         }
 
         return $tokens;
