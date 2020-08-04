@@ -131,7 +131,11 @@ class Hooks
     public function checkItemIsAvailable(ProductCollectionItem $item)
     {
         /** @var Product|Model $product */
-        $product     = $item->getProduct();
+        $product = $item->getProduct();
+        if (null === $product) {
+            return null;
+        }
+
         $productType = $product->getRelated('type');
 
         if (null === $productType || !$productType->stockmanagement_active) {
