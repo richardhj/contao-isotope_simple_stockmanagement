@@ -49,6 +49,18 @@ class LabelCallbackListener
         if ($index !== false) {
             $stock = Stock::getStockForProduct($row['id']);
 
+            if($stock === false) {
+                $blnVariants = $product->hasVariants();
+                if($blnVariants === true) {
+                    $arrVariants = $product->getVariantIds();
+                    foreach($arrVariants AS $var) {
+                        $intStock = Stock::getStockForProduct($var);
+                        if($intStock) {
+                            $stock.= '<div class="stock"><span style="color:#999;padding-left:3px">[ID: '.$var.']</span> '.$intStock.'</div>';
+                        }
+                    }
+                }
+            }
             $args[$index] = (false !== $stock) ? $stock : 'N/A';
         }
 
